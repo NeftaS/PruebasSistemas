@@ -29,23 +29,33 @@
   })(document, window.kommunicate || {});
 </script>
 
-<!-- Widget de 3CX -->
+<!-- Widget 3CX Live Chat -->
 <call-us-selector phonesystem-url="https://conrradmed.3cx.com.mx" party="LiveChat190037"></call-us-selector>
 <script defer src="https://downloads-global.3cx.com/downloads/livechatandtalk/v1/callus.js" id="tcx-callus-js" charset="utf-8"></script>
 
-<!-- Script para reposicionar el widget de 3CX -->
+<!-- Script para reposicionar dinámicamente el widget de 3CX -->
 <script>
+  // Esperar a que la interfaz se cargue completamente
   window.addEventListener("load", function () {
-    // Esperar un momento a que se cargue completamente el widget
-    setTimeout(function () {
-      const selector = document.querySelector("call-us-selector");
-      if (selector) {
-        selector.style.right = "20px";
-        selector.style.bottom = "100px"; // lo desplazamos hacia arriba
-        selector.style.position = "fixed";
-        selector.style.zIndex = "10000";
+    // Intentar encontrar el contenedor generado por 3CX después de un tiempo
+    const ajustar3CX = () => {
+      // El contenedor principal del botón flotante de 3CX suele tener esta clase:
+      const widget3CX = document.querySelector("#wp-live-chat-by-3CX") ||
+                        document.querySelector("div[class*='wp-live-chat']") ||
+                        document.querySelector("call-us-selector");
+
+      if (widget3CX) {
+        widget3CX.style.bottom = "120px";  // moverlo más arriba del Kommunicate
+        widget3CX.style.right = "20px";
+        widget3CX.style.position = "fixed";
+        widget3CX.style.zIndex = "10000";
+      } else {
+        // Reintenta si aún no ha cargado
+        setTimeout(ajustar3CX, 1000);
       }
-    }, 2000); // espera 2 segundos a que el widget esté presente
+    };
+
+    ajustar3CX();
   });
 </script>
 
