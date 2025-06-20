@@ -1,71 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chatbot del Laboratorio</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chatbot del Laboratorio</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
 </head>
 <body>
 
-<!-- Chatbot Kommunicate 
+<!-- Chatbot Kommunicate -->
 <script type="text/javascript">
-    (function(d, m){
-        var kommunicateSettings = {
-            "appId": "2c18ef93f78a250456b025df265425abd",
-            "popupWidget": true,
-            "automaticChatOpenOnNavigation": true
-        };
-        var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
-        s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
-        var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
-        window.kommunicate = m; m._globals = kommunicateSettings;
-    })(document, window.kommunicate || {});
-</script>-->
+  (function(d, m){
+      var kommunicateSettings = {
+          "appId": "2c18ef93f78a250456b025df265425abd",
+          "popupWidget": true,
+          "automaticChatOpenOnNavigation": true
+      };
+      var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+      s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+      var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+      window.kommunicate = m; m._globals = kommunicateSettings;
+  })(document, window.kommunicate || {});
+</script>
 
-<!-- Widget de 3CX para llamadas o chat opcional -->
-<!--Use the below code snippet to provide real time updates to the live chat plugin without the need of copying and paste each time to your website when changes are made via PBX-->
+<!-- Widget de 3CX -->
 <call-us-selector phonesystem-url="https://conrradmed.3cx.com.mx" party="LiveChat190037"></call-us-selector>
- 
-<!--Incase you don't want real time updates to the live chat plugin when options are changed, use the below code snippet. Please note that each time you change the settings you will need to copy and paste the snippet code to your website--> 
-<!--<call-us 
-phonesystem-url="https://conrradmed.3cx.com.mx" 
-style="position:fixed;font-size:16px;line-height:17px;z-index: 99999;--call-us-main-accent-color:#3397D4;--call-us-main-background-color:#FFFFFF;--call-us-plate-background-color:#373737;--call-us-plate-font-color:#E6E6E6;--call-us-main-font-color:#292929;--call-us-agent-bubble-color:#29292910;right: 20px; bottom: 20px;" 
-id="wp-live-chat-by-3CX" 
-minimized="true" 
-animation-style="slideup" 
-party="LiveChat190037" 
-minimized-style="bubbleright" 
-allow-call="true" 
-allow-video="false" 
-allow-soundnotifications="true" 
-enable-mute="true" 
-enable-onmobile="true" 
-offline-enabled="true" 
-enable="true" 
-ignore-queueownership="false" 
-authentication="none" 
-operator-name="Conrradmed" 
-show-operator-actual-name="true" 
-aknowledge-received="true" 
-gdpr-enabled="false" 
-message-userinfo-format="both" 
-message-dateformat="both" 
-lang="browser" 
-button-icon-type="doublebubble" 
-greeting-visibility="none" 
-greeting-offline-visibility="none" 
-chat-delay="2000" 
-enable-direct-call="true" 
-enable-ga="false" 
-></call-us>--> 
 <script defer src="https://downloads-global.3cx.com/downloads/livechatandtalk/v1/callus.js" id="tcx-callus-js" charset="utf-8"></script>
+
+<!-- Script para reposicionar el widget de 3CX -->
+<script>
+  window.addEventListener("load", function () {
+    // Esperar un momento a que se cargue completamente el widget
+    setTimeout(function () {
+      const selector = document.querySelector("call-us-selector");
+      if (selector) {
+        selector.style.right = "20px";
+        selector.style.bottom = "100px"; // lo desplazamos hacia arriba
+        selector.style.position = "fixed";
+        selector.style.zIndex = "10000";
+      }
+    }, 2000); // espera 2 segundos a que el widget esté presente
+  });
+</script>
 
 </body>
 </html>
